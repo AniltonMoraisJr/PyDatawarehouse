@@ -1,0 +1,34 @@
+{% extends 'administration.html' %}
+{% block content %}
+	<section class="content-header">
+		<h1>Novo Fornecedor</h1>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+					</div>
+					<div class="box-body">						
+						<form role="form" method="POST" action="{% url 'new_fornecedor' %}">
+							{% csrf_token %}
+							<div class="form-group">
+								<label>Nome</label>
+								<input type="text" name="nome"/>
+							</div>
+							<div class="form-group">
+								<label>CNPJ</label>
+								<input type="text" name="cnpj"/>
+							</div>
+							<div class="form-group">
+								<label>Telefone</label>
+								<input type="text" name="telefone"/>
+							</div>
+							<input type="submit" name="" value="Salvar" class="btn btn-success">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

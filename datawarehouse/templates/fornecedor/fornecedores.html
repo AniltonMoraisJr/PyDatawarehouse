@@ -1,0 +1,42 @@
+{% extends 'administration.html' %}
+{% block content %}
+	<section class="content-header">
+		<h1>Fornecedores</h1>
+		<small>Todos os fornecedores cadastrados</small>
+	</section>
+	<section class="content">
+		<div class="row">
+			<a href="{% url 'new_fornecedor' %}" class="btn btn-primary pull-right"> Novo Fornecedor</a>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Lista de fornecedores</h3>
+					</div>
+					<div class="box-body table-responsive no-padding">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>CNPJ</th>
+									<th>Telefone</th>
+								</tr>
+							</thead>		
+							<tbody>
+								{% for fornec in fornecedor_list %}
+									<tr>
+										<td>{{fornec.nome}}</td>
+										<td>{{fornec.cnpj}}</td>
+										<td>{{fornec.telefone}}</td>
+									</tr>
+								{% endfor %}
+							</tbody>		
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

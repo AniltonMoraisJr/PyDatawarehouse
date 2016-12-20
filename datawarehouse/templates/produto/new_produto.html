@@ -1,0 +1,46 @@
+{% extends 'administration.html' %}
+{% block content %}
+	<section class="content-header">
+		<h1>Novo Fornecedor</h1>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+					</div>
+					<div class="box-body">						
+						<form role="form" method="POST" action="{% url 'new_produto' %}"  enctype="multipart/form-data">
+							{% csrf_token %}
+							<div class="form-group">
+								<label>Nome</label>
+								<input type="text" name="nome"/>
+							</div>
+							<div class="form-group">
+								<label>Descricao</label>
+								<input type="text" name="descricao"/>
+							</div>
+							<div class="form-group">
+								<label>Preço</label>
+								<input type="text" name="preco"/>
+							</div>
+							<div class="form-group">
+								<label>Fornecedor</label>
+								<select name="fornecedor">
+									{% for fornec in fornecedor_list %}
+										<option value="{{fornec.id}}">{{fornec.nome}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Foto</label>
+								<input type="file" name="foto">
+							</div>
+							<input type="submit" name="" value="Salvar" class="btn btn-success">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'administration.html' %}
+{% block content %}
+	<section class="content-header">
+		<h1>Produtos</h1>
+		<small>Todos os produtos cadastrados</small>
+	</section>
+	<section class="content">
+		<div class="row">
+			<a href="{% url 'new_produto' %}" class="btn btn-primary pull-right"> Novo Produto</a>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Produtos</h3>
+					</div>
+					<div class="box-body table-responsive no-padding">
+					  {% if produto_list %}
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Valor</th>
+									<th>Fornecedor</th>
+								</tr>
+							</thead>		
+							<tbody>
+								{% for prod in produto_list %}
+									<tr>
+										<td>{{prod.nome}}</td>
+										<td>R$ {{prod.preco}}</td>
+										<td>{{prod.fornecedor.nome}}</td>
+									</tr>
+								{% endfor %}
+							</tbody>		
+						</table>
+					   {% else %}
+					   		<p>Nenhum produto cadastrado</p>
+					   	{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
