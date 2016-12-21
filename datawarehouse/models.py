@@ -17,4 +17,13 @@ class Produto (models.Model):
 
 	def __str__(self):
 		return self.nome
+class Agenda(models.Model):
+	title = models.CharField(max_length = 100)
+	start = models.DateTimeField()
+	end = models.DateTimeField()
+	allDay = models.BooleanField()
+
+	def __str__(self):
+		return self.title
+		
 

@@ -1,0 +1,41 @@
+{% extends 'administration.html' %}
+{% block content %}
+	<section class="content-header">
+		<h1>Nova Agenda</h1>
+	</section>
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+					</div>
+					<div class="box-body">						
+						<form role="form" method="POST" action="{% url 'new_agenda' %}">
+							{% csrf_token %}
+							<div class="form-group">
+								<label>Titulo</label>
+								<input type="text" name="title"/>
+							</div>
+							<div class="form-group">
+								<label>Inicio</label>
+								<input type="text" name="inicio" id="inicio"/>
+							</div>
+							<div class="form-group">
+								<label>Fim</label>
+								<input type="text" name="fim" id="fim" />
+							</div>							
+							<input type="submit" name="" value="Salvar" class="btn btn-success">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+{% block external_script %}
+	<script type="text/javascript">
+		$.datetimepicker.setLocale('pt');
+		$("#inicio").datetimepicker();		
+		$("#fim").datetimepicker();			
+	</script>
+{% endblock %}

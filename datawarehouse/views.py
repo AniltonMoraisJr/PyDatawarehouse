@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout
-from .models import Fornecedor, Produto
+import json
+from .models import Fornecedor, Produto, Agenda
+from datetime import datetime
 
 # Create your views here.
 def index (request):
@@ -64,3 +66,24 @@ def new_produto (request):
 		p.fornecedor = Fornecedor.objects.get(pk=request.POST['fornecedor'])
 		p.save()
 		return redirect('produtos')
+@login_required(login_url='login')
+def agenda (request):
+	return render(request, 'agenda/agenda.html')
+@login_required(login_url='login')
+def new_agenda (request):
+	if request.method == 'POST':
+		a = Agenda()
+		a.title = request.POST['title']
+		a.start = datetime.strptime(request.POST['inicio'], '%Y/%m/%d %H:%M')
+		a.end = datetime.strptime(request.POST['fim'], '%Y/%m/%d %H:%M')
+		a.allDay = False
+		a.save()
+		return redirect('agenda')
+	else:
+		return render(request, 'agenda/new_agenda.html')
+def get_agendas (request):
+	agendas_list = Agenda.objects.all()
+	events = []
+	for a in agendas_list:
+		events.append({'title' : a.title, 'start' : str(a.start), 'end' : str(a.end), 'allDay': a.allDay})
+	return HttpResponse(json.dumps(events), content_type='application/json')
